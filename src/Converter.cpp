@@ -15,9 +15,11 @@ string Converter::GetValueB64() const
    return "Hello!";
 }
 
-string Converter::GetValueHex() const
+unsigned char BinToHexChar(unsigned char bin)
 {
-   return "HelloHex!";
+   if (bin < 10) return '0' + bin;
+
+   return 'A' + bin - 10;
 }
 
 unsigned char hexCharToBin(unsigned char hexChar)
@@ -25,6 +27,22 @@ unsigned char hexCharToBin(unsigned char hexChar)
    if (hexChar < 'A') return hexChar - '0';
 
    return hexChar - 'A' + 10;
+}
+
+string Converter::GetValueHex() const
+{
+   string hexString;
+   for(auto index = 0; index < m_data.size(); ++index)
+   {
+      unsigned char leastSignificantNibble = m_data[index] & 0xF;
+      unsigned char mostSignificantNibble = (m_data[index] & 0xF << 4) >> 4;
+
+      hexString += BinToHexChar(mostSignificantNibble);
+      if (index < m_data.size() -1 || !m_lastCharSize)
+         hexString += BinToHexChar(leastSignificantNibble);
+   }
+
+   return hexString;
 }
 
 void Converter::SetValueHex(const string& hexString)

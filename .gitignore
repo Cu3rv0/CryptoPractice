@@ -1,2 +1,5 @@
 *.swp
 tags
+crypto
+testCrypto
+bin
