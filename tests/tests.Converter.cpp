@@ -13,19 +13,25 @@ public:
    ConversionTests():
       m_converter(make_unique<Converter>())
    {
-
    }
       
 };
 
-TEST_F(ConversionTests, converter_reads_right_hex_value)
+TEST_F(ConversionTests, converter_reads_and_outputs_right_hex_value)
 {
    // Given
-
    const string hexString = "CAFE";
-   const vector<unsigned int> expectedData = { 0b11001010,0b11111110 };
+   const vector<unsigned char> expectedData = { 0b11001010,0b11111110 };
+   
+   m_converter->SetValueHex(hexString);
 
-   //const unsigned int binaryValue = 0b1100101011111110;
+   //When
+   //Then
+   ASSERT_EQ(expectedData,m_converter->GetValueBinary());
+   ASSERT_EQ(hexString,m_converter->GetValueHex());
+}
 
-
+TEST_F(ConversionTests, converter_outputs_right_hex_value)
+{
+   //
 }
