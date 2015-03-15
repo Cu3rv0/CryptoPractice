@@ -25,7 +25,19 @@ unsigned char hexCharToBin(unsigned char hexChar)
 
 string Converter::GetValueHex() const
 {
-   return "HELLOHEX";
+   string hexString;
+   unsigned char binCharacter;
+
+   for (auto charIndex = 0; charIndex < m_dataBlob.size(); charIndex +=4)
+   {
+      for (auto bitIndex = 0; bitIndex != 4; ++bitIndex)
+      {
+          binCharacter += m_dataBlob[charIndex + bitIndex] << (3 - bitIndex);
+      }
+      hexString += BinToHexChar(binCharacter);
+      binCharacter = 0;
+   }
+   return hexString;
 }
 
 void Converter::SetValueHex(const string& hexString)
