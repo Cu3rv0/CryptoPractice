@@ -12,15 +12,20 @@ string Converter::GetValueB64() const
 unsigned char BinToHexChar(unsigned char bin)
 {
    if (bin < 10) return '0' + bin;
-
-   return 'A' + bin - 10;
+   else return 'A' + bin - 10;
 }
 
-unsigned char hexCharToBin(unsigned char hexChar)
+unsigned char HexCharToBin(unsigned char hexChar)
 {
    if (hexChar < 'A') return hexChar - '0';
+   else return hexChar - 'A' + 10;
+}
 
-   return hexChar - 'A' + 10;
+unsigned char B64CharToBin(unsigned char b64Char)
+{
+   if (b64Char < 'a') return b64Char - 'A';
+   if (b64Char < '0') return 26 + b64Char - 'a';
+   else return 52 + b64Char - '0';
 }
 
 string Converter::GetValueHex() const
@@ -40,6 +45,11 @@ string Converter::GetValueHex() const
    return hexString;
 }
 
+vector<bool> Converter::GetValueBinary() const
+{
+   return m_dataBlob;
+}
+
 void Converter::SetValueHex(const string& hexString)
 {
    for_each(hexString.begin(),
@@ -48,13 +58,21 @@ void Converter::SetValueHex(const string& hexString)
             {
                for(auto i = 3; i >= 0; --i)
                {
-                  m_dataBlob.push_back((hexCharToBin(c) >> i) & 1);
+                  m_dataBlob.push_back((HexCharToBin(c) >> i) & 1);
                }
             });
 }
 
-vector<bool> Converter::GetValueBinary() const
-{
-   return m_dataBlob;
-}
 
+void Converter::SetValueB64(const string& b64String)
+{
+   for_each(b64String.begin(),
+            b64String.end(),
+            [this](unsigned char c) mutable
+            {
+               for(auto i = 5; i>= 0; --i)
+               {
+                  m_dataBlob.push_back((B64CharToBin(c) >> i) & 1);
+               }
+            });
+}

@@ -10,8 +10,8 @@ public:
    std::vector<bool> GetValueBinary() const;
 
    void SetValueHex(const std::string& hexString);
-   void SetValueb64(const std::string& b64String);
-   void setValueBinary(std::vector<unsigned char> data, unsigned int size);
+   void SetValueB64(const std::string& b64String);
+   void SetValueBinary(std::vector<unsigned char> data, unsigned int size);
 
 private:
    

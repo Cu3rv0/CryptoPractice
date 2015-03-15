@@ -34,11 +34,12 @@ TEST_F(ConversionTests, converter_reads_and_outputs_right_hex_value)
 TEST_F(ConversionTests, converter_reads_and_outputs_right_b64_value)
 {
    // Given
-   //const string b64String = "SSdt";
-   //const vector<unsigned char> expectedData = (0b01001001,0b00100111,0b01101101);
+   const string b64String = "SSdt";
+   const vector<bool> expectedData = {0,1,0,0,1,0,0,1,0,0,1,0,0,1,1,1,0,1,1,0,1,1,0,1};
 
+   m_converter->SetValueB64(b64String);
    //When
    //Then
-   //ASSERT_EQ(expectedData,m_converter->GetValueBinary());
-   //ASSERT_EQ(hexString,m_converter->GetValueHex());
+   ASSERT_EQ(expectedData,m_converter->GetValueBinary());
+   ASSERT_EQ(b64String,m_converter->GetValueB64());
 }
