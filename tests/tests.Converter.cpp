@@ -66,3 +66,16 @@ TEST_F(ConversionTests, converter_reads_and_outputs_right_b64_value)
    EXPECT_EQ(expectedData,m_converter->GetValueBinary());
    EXPECT_EQ(b64String,m_converter->GetValueB64());
 }
+
+TEST_F(ConversionTests, converter_passes_cryptopals_challenge)
+{
+   // Given
+   const string hexString = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d";
+   const string expectedb64String = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t";
+
+   // When
+   m_converter->SetValueHex(hexString);
+
+   // Then
+   ASSERT_EQ(expectedb64String,m_converter->GetValueB64());
+}
