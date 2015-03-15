@@ -1,4 +1,4 @@
-#include "Converter.h"
+#include "Buffer.h"
 #include <algorithm>
 #include <iostream>
 
@@ -30,7 +30,7 @@ unsigned char B64CharToBin(unsigned char b64Char)
    else return 52 + b64Char - '0';
 }
 
-string Converter::GetValueHex() const
+string Buffer::GetValueHex() const
 {
    string hexString;
    unsigned char binCharacter;
@@ -47,7 +47,7 @@ string Converter::GetValueHex() const
    return hexString;
 }
 
-string Converter::GetValueB64() const
+string Buffer::GetValueB64() const
 {
    string b64String;
    unsigned char binCharacter;
@@ -63,12 +63,12 @@ string Converter::GetValueB64() const
    return b64String;
 }
 
-vector<bool> Converter::GetValueBinary() const
+vector<bool> Buffer::GetValueBinary() const
 {
    return m_dataBlob;
 }
 
-void Converter::SetValueHex(const string& hexString)
+void Buffer::SetValueHex(const string& hexString)
 {
    m_dataBlob.clear();
    for_each(hexString.begin(),
@@ -83,7 +83,7 @@ void Converter::SetValueHex(const string& hexString)
 }
 
 
-void Converter::SetValueB64(const string& b64String)
+void Buffer::SetValueB64(const string& b64String)
 {
    m_dataBlob.clear();
    for_each(b64String.begin(),

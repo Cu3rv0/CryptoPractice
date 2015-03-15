@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-class Converter
+class Buffer
 {
 public:
    std::string GetValueB64() const;
