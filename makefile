@@ -1,4 +1,4 @@
-all: crypto testCrypto
+all: crypto test
 
 INC = -I include
 CFLAGS = -std=c++14 -g
@@ -6,8 +6,8 @@ LDFLAGS = -lpthread -lgtest -lgtest_main
 OBJ = bin/Converter.o 
 TESTOBJ = bin/tests.Converter.o bin/tests.AllTests.o
 
-testCrypto: $(TESTOBJ) $(OBJ)
-	g++ $(TESTOBJ) $(OBJ) $(LDFLAGS) -o testCrypto
+test: $(TESTOBJ) $(OBJ)
+	g++ $(TESTOBJ) $(OBJ) $(LDFLAGS) -o test
 
 crypto: $(OBJ) bin/Sandbox.o
 	g++ $(OBJ) bin/Sandbox.o $(CLAGS) -o crypto
@@ -19,5 +19,5 @@ bin/%.o: src/%.cpp
 	g++ -c $(CFLAGS) $(INC) $< -o $@
 
 clean:
-	rm -r bin/*.o crypto testCrypto
+	rm -r bin/*.o crypto test
 
