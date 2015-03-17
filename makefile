@@ -3,8 +3,8 @@ all: crypto test
 INC = -I include
 CFLAGS = -std=c++14 -g
 LDFLAGS = -lpthread -lgtest -lgtest_main
-OBJ = bin/Buffer.o 
-TESTOBJ = bin/tests.Buffer.o bin/tests.AllTests.o
+OBJ = bin/Buffer.o
+TESTOBJ = bin/tests.Buffer.o bin/tests.AllTests.o bin/tests.BufferLogic.o
 
 test: $(TESTOBJ) $(OBJ)
 	g++ $(TESTOBJ) $(OBJ) $(LDFLAGS) -o test

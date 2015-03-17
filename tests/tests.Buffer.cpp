@@ -20,7 +20,7 @@ public:
 TEST_F(ConversionTests, buffer_reads_and_outputs_right_hex_value)
 {
    // Given
-   const string hexString = "CAFE";
+   const string hexString = "cafe";
    const vector<bool> expectedData = { 1,1,0,0,1,0,1,0,1,1,1,1,1,1,1,0 };
    
    m_buffer->SetValueHex(hexString);

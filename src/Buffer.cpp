@@ -4,10 +4,24 @@
 
 using namespace std;
 
+Buffer::Buffer()
+{
+}
+
+Buffer::Buffer(vector<bool> dataBlob):
+   m_dataBlob(dataBlob)
+{
+}
+
+unsigned int Buffer::Size() const
+{
+   return m_dataBlob.size();
+}
+
 unsigned char BinToHexChar(unsigned char bin)
 {
    if (bin < 10) return '0' + bin;
-   else return 'A' + bin - 10;
+   else return 'a' + bin - 10;
 }
 
 unsigned char BinToB64Char(unsigned char bin)
@@ -19,8 +33,8 @@ unsigned char BinToB64Char(unsigned char bin)
 
 unsigned char HexCharToBin(unsigned char hexChar)
 {
-   if (hexChar < 'A') return hexChar - '0';
-   else return hexChar - 'A' + 10;
+   if (hexChar < 'a') return hexChar - '0';
+   else return hexChar - 'a' + 10;
 }
 
 unsigned char B64CharToBin(unsigned char b64Char)
@@ -63,7 +77,7 @@ string Buffer::GetValueB64() const
    return b64String;
 }
 
-vector<bool> Buffer::GetValueBinary() const
+const vector<bool>& Buffer::GetValueBinary() const
 {
    return m_dataBlob;
 }

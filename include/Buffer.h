@@ -5,9 +5,13 @@
 class Buffer
 {
 public:
+   Buffer(std::vector<bool>);
+   Buffer();
+
    std::string GetValueB64() const;
    std::string GetValueHex() const;
-   std::vector<bool> GetValueBinary() const;
+   const std::vector<bool>& GetValueBinary() const;
+   unsigned int Size() const;
 
    void SetValueHex(const std::string& hexString);
    void SetValueB64(const std::string& b64String);
